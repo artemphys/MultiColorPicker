@@ -11,19 +11,19 @@
 <body>
 
 <div class="scroll-bar">
-    <div id="draggable1" class="draggable">
-        <div class="btn btn-xs input-group color-picker" >
-            <span class="input-group-addon"><i>1</i></span>
+    <div id="draggable1" class="draggable-extr">
+        <div class="input-group color-picker">
+            <span class="input-group-addon"></span><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
         </div>
     </div>
     <div id="draggable2" class="draggable">
-        <div class="btn btn-xs input-group color-picker" >
-            <span class="input-group-addon"><i>2</i></span>
+        <div class="btn btn-xs input-group color-picker">
+            <span class="input-group-addon"></span><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
         </div>
     </div>
-    <div id="draggable3" class="draggable">
-        <div class="btn btn-xs input-group color-picker" >
-            <span class="input-group-addon"><i>3</i></span>
+    <div id="draggable3" class="draggable-extr">
+        <div class="btn btn-xs input-group color-picker">
+            <span class="input-group-addon"></span><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
         </div>
     </div>
 </div>
@@ -39,6 +39,7 @@
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $( '.draggable' ).draggable({ axis: 'y', containment: 'parent'});
+            $( '.draggable-extr' ).draggable({ axis: 'y', containment: 'parent', revert: true});
             $('.color-picker').colorpicker({});
         });</script>
 

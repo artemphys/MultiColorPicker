@@ -6,14 +6,10 @@
     border: 1px solid black;
     border-radius: 3px;
 }
-.draggable {
+.draggable, .draggable-extr {
     border: none;!important;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    align-content: space-between;
 }
 .color-btn {
     z-index: 100;
