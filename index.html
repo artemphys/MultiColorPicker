@@ -5,20 +5,43 @@
     <!-- CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/scrollbar-style.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="bower_components/mjaalnir-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
 </head>
 <body>
 
+<div class="scroll-bar">
+    <div id="draggable1" class="draggable">
+        <div class="btn btn-xs input-group color-picker" >
+            <span class="input-group-addon"><i>1</i></span>
+        </div>
+    </div>
+    <div id="draggable2" class="draggable">
+        <div class="btn btn-xs input-group color-picker" >
+            <span class="input-group-addon"><i>2</i></span>
+        </div>
+    </div>
+    <div id="draggable3" class="draggable">
+        <div class="btn btn-xs input-group color-picker" >
+            <span class="input-group-addon"><i>3</i></span>
+        </div>
+    </div>
+</div>
 
     <!-- JS-->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/mjaalnir-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
     <script src="js/scrollbar.js"></script>
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
-            
+            $( '.draggable' ).draggable({ axis: 'y', containment: 'parent'});
+            $('.color-picker').colorpicker({});
         });</script>
+
 
 </body>
 </html>
