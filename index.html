@@ -11,20 +11,17 @@
 <body>
 
 <div class="scroll-bar">
-    <div id="draggable1" class="draggable-extr">
-        <div class="input-group color-picker">
-            <span class="input-group-addon"></span><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-        </div>
+    <div id="draggable1" class="row draggable-extr">
+        <div class="col-md-8 col-md-push-4 color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
+        <div class="col-md-4 col-md-pull-8"><input type="text" class="input-sm position-input-extr"></div>
     </div>
-    <div id="draggable2" class="draggable">
-        <div class="btn btn-xs input-group color-picker">
-            <span class="input-group-addon"></span><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-        </div>
+    <div id="draggable2" class="row draggable">
+        <div class="col-md-8 col-md-push-4 color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
+        <div class="col-md-4 col-md-pull-8"><input type="text" class="input-sm position-input"></div>
     </div>
-    <div id="draggable3" class="draggable-extr">
-        <div class="btn btn-xs input-group color-picker">
-            <span class="input-group-addon"></span><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-        </div>
+    <div id="draggable3" class="row draggable-extr">
+        <div class="col-md-8 col-md-push-4 color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
+        <div class="col-md-4 col-md-pull-8"><input type="text" class="input-sm position-input-extr"></div>
     </div>
 </div>
 
@@ -39,7 +36,7 @@
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $( '.draggable' ).draggable({ axis: 'y', containment: 'parent'});
-            $( '.draggable-extr' ).draggable({ axis: 'y', containment: 'parent', revert: true});
+            $( '.draggable-extr' ).draggable({ axis: 'y', containment: 'parent'});
             $('.color-picker').colorpicker({});
         });</script>
 

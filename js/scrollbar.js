@@ -5,5 +5,9 @@
     //    <span class="input-group-addon"><i>1</i></span></div></div>');
     //});
 
+    $('.draggable').mousemove(function() {
+        var trianglePosition = $('.draggable').position().top;
+        $('.position-input').val(trianglePosition);
+    });
 
 })(jQuery);

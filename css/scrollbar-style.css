@@ -7,14 +7,15 @@
     border-radius: 3px;
 }
 .draggable, .draggable-extr {
+    width: 100px;
     border: none;!important;
     cursor: pointer;
-    align-items: center;
 }
-.color-btn {
-    z-index: 100;
+.ui-triangle {
+    margin-left: -18px;
 }
-.input-group-addon {
-    width: 20px;
-    height: 20px
+.position-input, .position-input-extr {
+    margin-left: -52px;
+    width: 50px;
 }
+
