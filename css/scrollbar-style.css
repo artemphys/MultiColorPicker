@@ -5,21 +5,25 @@
     margin-top: 50px;
     border: 1px solid black;
     border-radius: 3px;
+    position:relative;
 }
-.draggable {
-    width: 100px;
+.scroll-bar .draggable {
+    width: 100%;
     border: none;!important;
     cursor: pointer;
 }
-.ui-triangle {
-    margin-left: -18px;
+.scroll-bar .draggable .color-control {
+    position:absolute; width:50px; top:-15px; left:-53px;
 }
-.position-input {
-    margin-left: -52px;
-    width: 50px;
+.scroll-bar .draggable .color-picker {
+    position: absolute;
+    width: 18px;
+    top: -10px;
+    right: -16px;
 }
 .bottom-point {
     position: absolute;
-    bottom: 76px;
+    top: 100%;
 }
 
+.colorpicker  {margin:3px 0 0 -5px !important;}
