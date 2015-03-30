@@ -6,7 +6,7 @@
     border: 1px solid black;
     border-radius: 3px;
 }
-.draggable, .draggable-extr {
+.draggable {
     width: 100px;
     border: none;!important;
     cursor: pointer;
@@ -14,8 +14,12 @@
 .ui-triangle {
     margin-left: -18px;
 }
-.position-input, .position-input-extr {
+.position-input {
     margin-left: -52px;
     width: 50px;
+}
+.bottom-point {
+    position: absolute;
+    bottom: 76px;
 }
 
