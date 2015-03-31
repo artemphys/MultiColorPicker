@@ -4,26 +4,13 @@
     <meta charset="UTF-8">
     <!-- CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/scrollbar-style.css" rel="stylesheet" media="screen">
+    <link href="css/multiColorPicker.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="bower_components/mjaalnir-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
 </head>
 <body>
 
-<div class="scroll-bar">
-    <div id="draggable1" class="nav-element top-point">
-        <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
-        <input type="text" class="form-control input-sm color-control top-input">
-    </div>
-    <div id="draggable2" class="nav-element draggable">
-        <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
-        <input type="text" class="form-control input-sm color-control">
-    </div>
-    <div id="draggable3" class="nav-element bottom-point">
-        <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
-        <input type="text" class="form-control input-sm color-control bottom-input">
-    </div>
-</div>
+    <div data-element="multicolorpicker"></div>
 
     <!-- JS-->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -32,11 +19,11 @@
     <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="bower_components/mjaalnir-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
-    <script src="js/scrollbar.js"></script>
+    <script src="js/multiColorPicker.js"></script>
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
-            $( '.draggable' ).draggable({ axis: 'y', containment: 'parent'});
-            $('.color-picker').colorpicker({});
+            $('[data-element="multicolorpicker"]').multicolorpicker();
+            console.log( $('[data-element="multicolorpicker"]').data('multicolorpicker').getColors());
         });</script>
 
 
