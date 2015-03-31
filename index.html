@@ -11,15 +11,15 @@
 <body>
 
 <div class="scroll-bar">
-    <div id="draggable1" class="draggable top-point">
+    <div id="draggable1" class="nav-element top-point">
         <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
         <input type="text" class="form-control input-sm color-control top-input">
     </div>
-    <div id="draggable2" class="draggable">
+    <div id="draggable2" class="nav-element draggable">
         <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
         <input type="text" class="form-control input-sm color-control">
     </div>
-    <div id="draggable3" class="draggable bottom-point">
+    <div id="draggable3" class="nav-element bottom-point">
         <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>
         <input type="text" class="form-control input-sm color-control bottom-input">
     </div>
@@ -36,8 +36,6 @@
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $( '.draggable' ).draggable({ axis: 'y', containment: 'parent'});
-            $( '.top-point' ).draggable({ revert: true});
-            $( '.bottom-point' ).draggable({revert: true});
             $('.color-picker').colorpicker({});
         });</script>
 

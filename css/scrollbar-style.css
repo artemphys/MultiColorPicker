@@ -6,16 +6,17 @@
     border: 1px solid black;
     border-radius: 3px;
     position:relative;
+    background: -webkit-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%);
 }
-.scroll-bar .draggable {
+.scroll-bar .nav-element {
     width: 100%;
     border: none;!important;
     cursor: pointer;
 }
-.scroll-bar .draggable .color-control {
+.scroll-bar .nav-element .color-control {
     position:absolute; width:50px; top:-15px; left:-53px;
 }
-.scroll-bar .draggable .color-picker {
+.scroll-bar .nav-element .color-picker {
     position: absolute;
     width: 18px;
     top: -10px;
@@ -25,5 +26,8 @@
     position: absolute;
     top: 100%;
 }
-
+.scroll-bar .draggable {z-index:100;}
 .colorpicker  {margin:3px 0 0 -5px !important;}
+.scroll-bar .nav-element .ui-triangle {color: #fff605;}
+.scroll-bar .top-point .ui-triangle {color: #ff0509;}
+.scroll-bar .bottom-point .ui-triangle {color: #0026ff;}
