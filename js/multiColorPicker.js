@@ -1,7 +1,7 @@
 +function ($) {
     'use strict';
 
-    // BUTTON PUBLIC CLASS DEFINITION
+    // MULTICOLORPICKER PUBLIC CLASS DEFINITION
     // ==============================
 
     var MultiColorPicker = function (element, options) {
