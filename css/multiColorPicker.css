@@ -1,4 +1,4 @@
-.multiple-color-selector {
+.multiColorPicker {
     width: 20px;
     height:400px;
     margin-left:200px;
@@ -6,28 +6,29 @@
     border: 1px solid black;
     border-radius: 3px;
     position:relative;
-    background: -webkit-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%);
+    background: -webkit-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%);/* Chrome10+,Safari5.1+ */
+    background: -ms-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%); /* IE10+ */
+    background: -moz-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%);/* FF3.6+ */
 }
-.multiple-color-selector .nav-element {
+.multiColorPicker .nav-element {
     width: 100%;
     border: none;!important;
     cursor: pointer;
 }
-.multiple-color-selector .nav-element .color-control {
+.multiColorPicker .nav-element .color-control {
     position:absolute; width:50px; top:-15px; left:-53px;
 }
-.multiple-color-selector .nav-element .color-picker {
+.multiColorPicker .nav-element .color-picker {
     position: absolute;
     width: 18px;
     top: -10px;
     right: -16px;
 }
-.multiple-color-selector .bottom-point {
+.multiColorPicker .bottom-point {
     position: absolute;
     top: 100%;
 }
-.multiple-color-selector .draggable {z-index:100;}
-.multiple-color-selector .colorpicker  {margin:3px 0 0 -5px !important;}
-.multiple-color-selector .nav-element .ui-triangle {color: #fff605;}
-.multiple-color-selector .top-point .ui-triangle {color: #ff0509;}
-.multiple-color-selector .bottom-point .ui-triangle {color: #0026ff;}
+.multiColorPicker .draggable {z-index:100;}
+.multiColorPicker .nav-element .ui-triangle {color: #fff605;}
+.multiColorPicker .top-point .ui-triangle {color: #ff0509;}
+.multiColorPicker .bottom-point .ui-triangle {color: #0026ff;}

@@ -14,7 +14,7 @@
     MultiColorPicker.VERSION  = '1.0.0'
 
     MultiColorPicker.DEFAULTS = {
-        template: '<div class="multiple-color-selector">\
+        template: '<div class="multiColorPicker">\
                         <div class="nav-element top-point">\
                             <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>\
                             <input type="text" class="form-control input-sm color-control top-input">\
@@ -40,7 +40,7 @@
         var midPosition = 500;
         var topPosition = 1000;
         var bottomPosition = 0;
-        var scrollbarLenght = $('.multiple-color-selector', element).height();
+        var scrollbarLenght = $('.multiColorPicker', element).height();
         var scale = scrollbarLenght/100;
         
         $('.draggable', element).find('.color-control').val(500).parent().css('top','50%');
@@ -56,7 +56,10 @@
             var topColor = $('.top-point').find('.ui-triangle').css('color');
             var bottomColor = $('.bottom-point').find('.ui-triangle').css('color');
             var midColor = $('.ui-triangle', this).css('color');
-            $('.multiple-color-selector').css('background', '-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%');
+            $('.multiColorPicker')
+                .css('background','-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%)')
+                .css('background', '-ms-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%)')
+                .css('background','-moz-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%)');
         });
 
         $('.top-point', element).find('.color-control').change(function() {
@@ -93,7 +96,10 @@
             var topColor = $('.top-point', element).find('.ui-triangle').css('color');
             var bottomColor = $('.bottom-point', element).find('.ui-triangle').css('color');
             var midColor = $('.ui-triangle', this).css('color');
-            $('.multiple-color-selector').css('background', '-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%');
+            $('.multiColorPicker')
+                .css('background', '-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
+                .css('background', '-ms-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
+                .css('background','-moz-linear-gradient(top, '+topColor+' 0%,'+midColor+'%,'+bottomColor+' 100%)');
         });
 
         $( '.draggable', element).draggable({ axis: 'y', containment: 'parent'});
