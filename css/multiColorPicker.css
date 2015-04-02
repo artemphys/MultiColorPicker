@@ -16,19 +16,23 @@
     cursor: pointer;
 }
 .multiColorPicker .nav-element .color-control {
-    position:absolute; width:50px; top:-15px; left:-53px;
+    position:absolute; width:50px; top:-15px; left:-53px; text-align:right;
 }
 .multiColorPicker .nav-element .color-picker {
     position: absolute;
-    width: 18px;
-    top: -10px;
-    right: -16px;
+    width: 0;
+    height: 0;
+    top: -6px;
+    right: -10px;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 8px solid #222;
 }
 .multiColorPicker .bottom-point {
     position: absolute;
     top: 100%;
 }
 .multiColorPicker .draggable {z-index:100;}
-.multiColorPicker .nav-element .ui-triangle {color: #fff605;}
-.multiColorPicker .top-point .ui-triangle {color: #ff0509;}
-.multiColorPicker .bottom-point .ui-triangle {color: #0026ff;}
+.multiColorPicker .nav-element .color-picker {border-right-color: #fff605;}
+.multiColorPicker .top-point .color-picker {border-right-color: #ff0509;}
+.multiColorPicker .bottom-point .color-picker {border-right-color: #0026ff;}

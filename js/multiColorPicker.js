@@ -16,15 +16,15 @@
     MultiColorPicker.DEFAULTS = {
         template: '<div class="multiColorPicker">\
                         <div class="nav-element top-point">\
-                            <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>\
+                            <div class="color-picker ui-triangle"></div>\
                             <input type="text" class="form-control input-sm color-control top-input">\
                         </div>\
                         <div class="nav-element draggable">\
-                            <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>\
+                            <div class="color-picker ui-triangle"></div>\
                             <input type="text" class="form-control input-sm color-control">\
                         </div>\
                         <div class="nav-element bottom-point">\
-                            <div class="color-picker"><span class="glyphicon glyphicon-triangle-left ui-triangle"></span></div>\
+                            <div class="color-picker ui-triangle"></div>\
                             <input type="text" class="form-control input-sm color-control bottom-input">\
                         </div>\
                     </div>',
@@ -46,32 +46,43 @@
         $('.draggable', element).find('.color-control').val(500).parent().css('top','50%');
         $('.top-point', element).find('.color-control').val(1000);
         $('.bottom-point', element).find('.color-control').val(0);
-        
-        $('.draggable', element).mousemove(function() {
-            var range = topPosition - bottomPosition;
-            $('.color-control', this).val((range/scrollbarLenght)*(scrollbarLenght - $(this).position().top));
+        function thisPosition(){
+            midPosition = +$('.draggable', element).find('.color-control').val();
+            topPosition = +$('.top-point', element).find('.color-control').val();
+            bottomPosition = +$('.bottom-point', element).find('.color-control').val();
+        }
+        $('.draggable', element).mousedown(function() {
+            $('.draggable', element).mousemove(function () {
+                var range = topPosition - bottomPosition;
+                //debugger;
+                if(scrollbarLenght - $(this).position().top !== 0) {
+                    $('.color-control', this).val(bottomPosition+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
+                }
 
-            var colorPosition =$(this).position().top/scale;
-            
-            var topColor = $('.top-point').find('.ui-triangle').css('color');
-            var bottomColor = $('.bottom-point').find('.ui-triangle').css('color');
-            var midColor = $('.ui-triangle', this).css('color');
-            $('.multiColorPicker')
-                .css('background','-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%)')
-                .css('background', '-ms-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%)')
-                .css('background','-moz-linear-gradient(top, '+topColor+' 0%,'+midColor+colorPosition+'%,'+bottomColor+' 100%)');
+                thisPosition();
+
+                var colorPosition = $(this).position().top / scale;
+
+                var topColor = $('.top-point').find('.ui-triangle').css('border-right-color');
+                var bottomColor = $('.bottom-point').find('.ui-triangle').css('border-right-color');
+                var midColor = $('.ui-triangle', this).css('border-right-color');
+                $('.multiColorPicker')
+                    .css('background', '-webkit-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
+                    .css('background', '-ms-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
+                    .css('background', '-moz-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)');
+            });
         });
-
         $('.top-point', element).find('.color-control').change(function() {
-            topPosition = $(this).val();
+            topPosition = +$(this).val();
             calibr();
         });
         $('.bottom-point', element).find('.color-control').change(function() {
-            bottomPosition = $(this).val();
+            bottomPosition = +$(this).val();
             calibr();
         });
         $('.draggable', element).find('.color-control').change(function() {
-            midPosition = $(this).val();
+
+            midPosition = +$(this).val();
             calibr();
 
         });
@@ -87,15 +98,17 @@
                 $('.draggable', element).css('top','100%');
             }
             else {$('.draggable').css('top',100-(midPosition*100)/range+'%');};
-            $('.draggable', element).mousemove();
+            thisPosition();
+            //$('.draggable', element).mousemove();
         };
 
         $('.color-picker', element).colorpicker().on('changeColor.colorpicker', function(event){
-            $('.ui-triangle', this).css('color', event.color.toHex());
-            
-            var topColor = $('.top-point', element).find('.ui-triangle').css('color');
-            var bottomColor = $('.bottom-point', element).find('.ui-triangle').css('color');
-            var midColor = $('.ui-triangle', this).css('color');
+            $(this).css('border-right-color', event.color.toHex());
+
+            var topColor = $('.top-point', element).find('.ui-triangle').css('border-right-color');
+            var bottomColor = $('.bottom-point', element).find('.ui-triangle').css('border-right-color');
+            var midColor = $('.ui-triangle').css('border-right-color');
+            console.log(midColor);
             $('.multiColorPicker')
                 .css('background', '-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
                 .css('background', '-ms-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
@@ -119,9 +132,9 @@
     MultiColorPicker.prototype.getColors = function () {
         
         var data = {
-            topColor : RGBA2HEX($('.top-point', this.$element).find('.ui-triangle').css('color')),
-            bottomColor : RGBA2HEX($('.bottom-point', this.$element).find('.ui-triangle').css('color')),
-            midColor : RGBA2HEX($('.draggable', this.$element).find('.ui-triangle').css('color')),
+            topColor : RGBA2HEX($('.top-point', this.$element).find('.ui-triangle').css('border-right-color')),
+            bottomColor : RGBA2HEX($('.bottom-point', this.$element).find('.ui-triangle').css('border-right-color')),
+            midColor : RGBA2HEX($('.draggable', this.$element).find('.ui-triangle').css('border-right-color')),
             topValue : $('.top-point', this.$element).find('.color-control').val(),
             bottomValue : $('.bottom-point', this.$element).find('.color-control').val(),
             midValue : $('.draggable', this.$element).find('.color-control').val()
