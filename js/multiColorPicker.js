@@ -17,15 +17,15 @@
         template: '<div class="multiColorPicker">\
                         <div class="nav-element top-point">\
                             <div class="color-picker ui-triangle"></div>\
-                            <input type="text" class="form-control input-sm color-control top-input">\
+                            <input type="text" class="form-control input-sm color-control top-input" maxlength="5">\
                         </div>\
                         <div class="nav-element draggable">\
-                            <div class="color-picker ui-triangle"></div>\
-                            <input type="text" class="form-control input-sm color-control">\
+                            <div class="draggableRadius"><div class="color-picker ui-triangle"></div></div>\
+                            <input type="text" class="form-control input-sm color-control" maxlength="5">\
                         </div>\
                         <div class="nav-element bottom-point">\
                             <div class="color-picker ui-triangle"></div>\
-                            <input type="text" class="form-control input-sm color-control bottom-input">\
+                            <input type="text" class="form-control input-sm color-control bottom-input" maxlength="5">\
                         </div>\
                     </div>',
 
@@ -54,9 +54,8 @@
         $('.draggable', element).mousedown(function() {
             $('.draggable', element).mousemove(function () {
                 var range = topPosition - bottomPosition;
-                //debugger;
                 if(scrollbarLenght - $(this).position().top !== 0) {
-                    $('.color-control', this).val(bottomPosition+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
+                    $('.color-control', this).val(Math.round(bottomPosition+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top))));
                 }
 
                 thisPosition();
@@ -72,17 +71,20 @@
                     .css('background', '-moz-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)');
             });
         });
+        $('.draggableRadius').mouseleave(function () {
+            $('.draggable', element).trigger('mouseup');
+        });
         $('.top-point', element).find('.color-control').change(function() {
-            topPosition = +$(this).val();
+            topPosition = Math.round(+$(this).val());
             calibr();
         });
         $('.bottom-point', element).find('.color-control').change(function() {
-            bottomPosition = +$(this).val();
+            bottomPosition = Math.round(+$(this).val());
             calibr();
         });
         $('.draggable', element).find('.color-control').change(function() {
 
-            midPosition = +$(this).val();
+            midPosition = Math.round(+$(this).val());
             calibr();
 
         });
@@ -108,7 +110,6 @@
             var topColor = $('.top-point', element).find('.ui-triangle').css('border-right-color');
             var bottomColor = $('.bottom-point', element).find('.ui-triangle').css('border-right-color');
             var midColor = $('.ui-triangle').css('border-right-color');
-            console.log(midColor);
             $('.multiColorPicker')
                 .css('background', '-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
                 .css('background', '-ms-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
