@@ -16,7 +16,7 @@
     cursor: pointer;
 }
 .multiColorPicker .nav-element .color-control {
-    position:absolute; width:50px; top:-15px; left:-53px; text-align:right;
+    position:absolute; width:58px; height: 22px; top:-13px; left:-60px; text-align:right;
 }
 .multiColorPicker .nav-element .color-picker {
     position: absolute;
@@ -41,11 +41,11 @@
     position: absolute;
     width: 0px;
     height: 0px;
-    top: -50px;
-    right: -60px;
-    border-top: 50px solid transparent;
-    border-bottom: 50px solid transparent;
-    border-right: 60px solid #ffffff;
+    top: -44px;
+    right: -56px;
+    border-top: 43px solid transparent;
+    border-bottom: 43px solid transparent;
+    border-right: 55px solid transparent;
 }
 .ui-triangle {
     border-right: 1px solid #222;}
