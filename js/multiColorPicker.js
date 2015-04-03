@@ -87,7 +87,7 @@
                 $(this).css({'border-color':'red'});
                 return false;
             }
-            else {that.options.pinEndValue = +$(this).val();}
+            else {that.options.pinEndValue = (+$(this).val()).toFixed(5);}
             calibr();
         });
         $startedPin.$input.on('change', function() {
@@ -97,11 +97,11 @@
                 $(this).css({'border-color':'red'});
                 return false;
             }
-            else {that.options.pinStartValue = +$(this).val();}
+            else {that.options.pinStartValue = (+$(this).val()).toFixed(5);}
             calibr();
         });
         $draggablePin.$input.on('change', function() {
-            that.options.pinMidValue = +$(this).val();
+            that.options.pinMidValue = (+$(this).val()).toFixed(5);
             calibr();
         });
 
@@ -147,7 +147,7 @@
         function onPinMove(){
             var range = that.options.pinEndValue - that.options.pinStartValue;
             if(scrollbarLenght - $(this).position().top !== 0) {
-                $draggablePin.$input.val(that.options.pinStartValue+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
+                $draggablePin.$input.val((that.options.pinStartValue+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top))).toFixed(5));
             }
 
             thatPosition();
