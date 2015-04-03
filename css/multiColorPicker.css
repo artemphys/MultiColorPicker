@@ -16,7 +16,7 @@
     cursor: pointer;
 }
 .multiColorPicker .nav-element .color-control {
-    position:absolute; width:58px; height: 22px; top:-13px; left:-60px; text-align:right;
+    position:absolute; width:58px; height: 22px; top:-13px; left:-60px; text-align:right; padding: 2px;
 }
 .multiColorPicker .nav-element .color-picker {
     position: absolute;

@@ -81,11 +81,23 @@
         //});
 
         $endedPin.$input.on('change', function() {
-            that.options.pinEndValue = +$(this).val();
+            $(this).css({'border-color':''});
+            if(+$(this).val()<=$startedPin.$input.val()){
+                +$(this).val(null);
+                $(this).css({'border-color':'red'});
+                return false;
+            }
+            else {that.options.pinEndValue = +$(this).val();}
             calibr();
         });
         $startedPin.$input.on('change', function() {
-            that.options.pinStartValue = +$(this).val();
+            $(this).css({'border-color':''});
+            if(+$(this).val()>=$endedPin.$input.val()){
+                +$(this).val(null);
+                $(this).css({'border-color':'red'});
+                return false;
+            }
+            else {that.options.pinStartValue = +$(this).val();}
             calibr();
         });
         $draggablePin.$input.on('change', function() {
@@ -133,7 +145,6 @@
         };
 
         function onPinMove(){
-
             var range = that.options.pinEndValue - that.options.pinStartValue;
             if(scrollbarLenght - $(this).position().top !== 0) {
                 $draggablePin.$input.val(that.options.pinStartValue+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
