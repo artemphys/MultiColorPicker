@@ -29,98 +29,133 @@
                         </div>\
                     </div>',
 
-        loadingText: 'loading...'
+        loadingText: 'loading...',
+
+        pinStartValue: 0,
+        pinMidValue: 0.25,
+        pinEndValue: 1,
+
+        pinStartColor: '#ff0509',
+        pinMidColor: '#fff605',
+        pinEndColor: '#0026ff',
+
+        size: 350
     }
 
     MultiColorPicker.prototype.init = function (element, options) {
-
-        this.options   = this.getOptions(options);
-        this.$element.html(this.options.template);
-
-        var midPosition = 500;
-        var topPosition = 1000;
-        var bottomPosition = 0;
-        var scrollbarLenght = $('.multiColorPicker', element).height();
-        var scale = scrollbarLenght/100;
         
-        $('.draggable', element).find('.color-control').val(500).parent().css('top','50%');
-        $('.top-point', element).find('.color-control').val(1000);
-        $('.bottom-point', element).find('.color-control').val(0);
+        var that = this;
+        that.options   = that.getOptions(options);
+        that.$element.html(that.options.template);
 
-        function thisPosition(){
-            midPosition = +$('.draggable', element).find('.color-control').val();
-            topPosition = +$('.top-point', element).find('.color-control').val();
-            bottomPosition = +$('.bottom-point', element).find('.color-control').val();
-        }
+        // Init sub jquery plugins
+        var $colorpickers = $('.color-picker', element).colorpicker();
 
-        $('.draggable', element).mousedown(function() {
-            $('.draggable', element).mousemove(function () {
-                var range = topPosition - bottomPosition;
-                if(scrollbarLenght - $(this).position().top !== 0) {
-                    $('.color-control', this).val(bottomPosition+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
-                }
+        var $draggablePin = $('.draggable', element).draggable({ axis: 'y', containment: 'parent'});
+        var $startedPin = $('.bottom-point', element);
+        var $endedPin = $('.top-point', element);
+        
+        $draggablePin.$input = $draggablePin.find('.color-control');
+        $startedPin.$input = $startedPin.find('.color-control');
+        $endedPin.$input = $endedPin.find('.color-control');
+        // end
+        
+        // Set default parameters
+        var $multiColorPicker = $('.multiColorPicker', element);
+        $multiColorPicker.height(that.options.size);
 
-                thisPosition();
+        var scrollbarLenght = that.options.size;
+        var scale = scrollbarLenght/100;
 
-                var colorPosition = $(this).position().top / scale;
+        $draggablePin.$input.val(that.options.pinMidValue);
+        $endedPin.$input.val(that.options.pinEndValue);
+        $startedPin.$input.val(that.options.pinStartValue);
+        // end
+        
+        // Attach events handlers
+        $draggablePin.mousedown(onPinMove);
+        $draggablePin.mousemove(onPinMove);
 
-                var topColor = $('.top-point').find('.ui-triangle').css('border-right-color');
-                var bottomColor = $('.bottom-point').find('.ui-triangle').css('border-right-color');
-                var midColor = $('.ui-triangle', this).css('border-right-color');
-                $('.multiColorPicker')
-                    .css('background', '-webkit-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
-                    .css('background', '-ms-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
-                    .css('background', '-moz-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)');
-            });
-        });
-        $('.draggableRadius').mouseleave(function () {
-            $('.draggable', element).trigger('mouseup');
-        });
-        $('.top-point', element).find('.color-control').change(function() {
-            topPosition = Math.round(+$(this).val());
+        //$('.draggableRadius', $draggablePin).on('mouseleave', function () {
+        //    $draggablePin.trigger('mouseup');
+        //});
+
+        $endedPin.$input.on('change', function() {
+            that.options.pinEndValue = +$(this).val();
             calibr();
         });
-        $('.bottom-point', element).find('.color-control').change(function() {
-            bottomPosition = Math.round(+$(this).val());
+        $startedPin.$input.on('change', function() {
+            that.options.pinStartValue = +$(this).val();
             calibr();
         });
-        $('.draggable', element).find('.color-control').change(function() {
-
-            midPosition = Math.round(+$(this).val());
+        $draggablePin.$input.on('change', function() {
+            that.options.pinMidValue = +$(this).val();
             calibr();
-
         });
 
-        function calibr(){
-            var range = topPosition - bottomPosition;
-            if(topPosition <= midPosition){
-                $('.draggable', element).find('.color-control').val(topPosition);
-                $('.draggable', element).css('top','0%');
-            }
-            else if(bottomPosition >= midPosition){
-                $('.draggable', element).find('.color-control').val(bottomPosition);
-                $('.draggable', element).css('top','100%');
-            }
-            else {$('.draggable').css('top',100-(midPosition*100)/range+'%');};
-            thisPosition();
-            //$('.draggable', element).mousemove();
-        };
-
-        $('.color-picker', element).colorpicker().on('changeColor.colorpicker', function(event){
+        $colorpickers.on('changeColor.colorpicker', function(event){
             $(this).css('border-right-color', event.color.toHex());
 
-            var topColor = $('.top-point', element).find('.ui-triangle').css('border-right-color');
-            var bottomColor = $('.bottom-point', element).find('.ui-triangle').css('border-right-color');
-            var midColor = $('.ui-triangle').css('border-right-color');
-            $('.multiColorPicker')
-                .css('background', '-webkit-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
-                .css('background', '-ms-linear-gradient(top, '+topColor+' 0%,'+midColor+' 50%,'+bottomColor+' 100%)')
-                .css('background','-moz-linear-gradient(top, '+topColor+' 0%,'+midColor+'%,'+bottomColor+' 100%)');
+            that.options.pinEndColor = $endedPin.find('.ui-triangle').css('border-right-color');
+            that.options.pinStartColor = $startedPin.find('.ui-triangle').css('border-right-color');
+            that.options.pinMidColor = $('.ui-triangle').css('border-right-color');
+
+            $multiColorPicker
+                .css('background', '-webkit-linear-gradient(top, '+that.options.pinEndColor+' 0%,'+that.options.pinMidColor+' 50%,'+that.options.pinStartColor+' 100%)')
+                .css('background', '-ms-linear-gradient(top, '+that.options.pinEndColor+' 0%,'+that.options.pinMidColor+' 50%,'+that.options.pinStartColor+' 100%)')
+                .css('background','-moz-linear-gradient(top, '+that.options.pinEndColor+' 0%,'+that.options.pinMidColor+' 50%,'+that.options.pinStartColor+' 100%)');
         });
 
-        $( '.draggable', element).draggable({ axis: 'y', containment: 'parent'});
-        $('.color-picker', element).colorpicker({});
+        // end
 
+        function calibr(){
+
+            var range = that.options.pinEndValue - that.options.pinStartValue;
+            if(that.options.pinEndValue <= that.options.pinMidValue){
+                $draggablePin.$input.val(that.options.pinEndValue);
+                $draggablePin.css('top','0%');
+            }
+            else if(that.options.pinStartValue >= that.options.pinMidValue){
+                $draggablePin.$input.val(that.options.pinStartValue);
+                $draggablePin.css('top','100%');
+            }
+            else {
+                $('.draggable').css('top',100-(((that.options.pinMidValue-that.options.pinStartValue)*100)/range)+'%');
+            }
+            thatPosition();
+            //$draggablePin.mousemove();
+        };
+
+        function thatPosition(){
+            that.options.pinMidValue = +$draggablePin.$input.val();
+            that.options.pinEndValue = +$endedPin.$input.val();
+            that.options.pinStartValue = +$startedPin.$input.val();
+        };
+
+        function onPinMove(){
+
+            var range = that.options.pinEndValue - that.options.pinStartValue;
+            if(scrollbarLenght - $(this).position().top !== 0) {
+                $draggablePin.$input.val(that.options.pinStartValue+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
+            }
+
+            thatPosition();
+            var colorPosition = $(this).position().top / scale;
+            var topColor = $('.top-point').find('.ui-triangle').css('border-right-color');
+            var bottomColor = $('.bottom-point').find('.ui-triangle').css('border-right-color');
+            var midColor = $('.ui-triangle', this).css('border-right-color');
+
+            that.options.pinEndColor = topColor;
+            that.options.pinMidColor = midColor;
+            that.options.pinStartColor = bottomColor;
+
+            $multiColorPicker
+                .css('background', '-webkit-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
+                .css('background', '-ms-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
+                .css('background', '-moz-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)');
+        };
+
+        calibr();
     }
 
     MultiColorPicker.prototype.getDefaults = function () {
@@ -133,19 +168,24 @@
     }
 
     MultiColorPicker.prototype.getColors = function () {
-        var data = {
-            topColor : RGBA2HEX($('.top-point', this.$element).find('.ui-triangle').css('border-right-color')),
-            bottomColor : RGBA2HEX($('.bottom-point', this.$element).find('.ui-triangle').css('border-right-color')),
-            midColor : RGBA2HEX($('.draggable', this.$element).find('.ui-triangle').css('border-right-color')),
-            topValue : $('.top-point', this.$element).find('.color-control').val(),
-            bottomValue : $('.bottom-point', this.$element).find('.color-control').val(),
-            midValue : $('.draggable', this.$element).find('.color-control').val()
-        };
-        return data;
+        return {
+            topColor : RGBA2HEX(this.options.pinEndColor),
+            midColor : RGBA2HEX(this.options.pinMidColor),
+            bottomColor : RGBA2HEX(this.options.pinStartColor),
+            topValue : this.options.pinEndValue,
+            midValue : this.options.pinMidValue,
+            bottomValue : this.options.pinStartValue
+        }
+    }
+
+    MultiColorPicker.prototype.setBackgroundColor = function ($el) {
+        //
     }
 
     function RGBA2HEX( color_value ) {
         if ( ! color_value ) return false;
+        if ( color_value.indexOf('rgb') == -1) return color_value;
+
         var parts = color_value.toLowerCase().match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/),
             length = color_value.indexOf('rgba') ? 3 : 2; // Fix for alpha values
         delete(parts[0]);
@@ -153,7 +193,7 @@
             parts[i] = parseInt( parts[i] ).toString(16);
             if ( parts[i].length == 1 ) parts[i] = '0' + parts[i];
         }
-        return '#' + parts.join('').toUpperCase(); // #F7F7F7
+        return '#' + parts.join('').toUpperCase();
     }
 
     // MULTICOLORPICKER PLUGIN DEFINITION
