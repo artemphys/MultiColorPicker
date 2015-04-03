@@ -46,16 +46,18 @@
         $('.draggable', element).find('.color-control').val(500).parent().css('top','50%');
         $('.top-point', element).find('.color-control').val(1000);
         $('.bottom-point', element).find('.color-control').val(0);
+
         function thisPosition(){
             midPosition = +$('.draggable', element).find('.color-control').val();
             topPosition = +$('.top-point', element).find('.color-control').val();
             bottomPosition = +$('.bottom-point', element).find('.color-control').val();
         }
+
         $('.draggable', element).mousedown(function() {
             $('.draggable', element).mousemove(function () {
                 var range = topPosition - bottomPosition;
                 if(scrollbarLenght - $(this).position().top !== 0) {
-                    $('.color-control', this).val(Math.round(bottomPosition+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top))));
+                    $('.color-control', this).val(bottomPosition+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top)));
                 }
 
                 thisPosition();
@@ -131,7 +133,6 @@
     }
 
     MultiColorPicker.prototype.getColors = function () {
-        
         var data = {
             topColor : RGBA2HEX($('.top-point', this.$element).find('.ui-triangle').css('border-right-color')),
             bottomColor : RGBA2HEX($('.bottom-point', this.$element).find('.ui-triangle').css('border-right-color')),
