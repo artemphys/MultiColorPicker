@@ -1,7 +1,7 @@
 <div>
     <h2>MULTICOLORPICKER PLUGIN v1.0.1</h2>
     <br>
-    <h4>A simple JQuery plugin </h4>
+    <p>A simple JQuery plugin. </p>
 
     <img src="MultiColorPicker.gif">
 
@@ -10,14 +10,14 @@
     <br>
     <h4>1.Copy MULTICOLORPICKER PLUGIN files to your app.</h4><br>
     <h4>2.Include script after the jQuery library:</h4>
-    <div class="highlight highlight-html"><pre><<span class="pl-ent">script</span> src="/path/to/multiColorPicker.js"><<span class="pl-ent">/script</span>></pre></div><br>
+    <div class="highlight highlight-html"><pre><span class="pl-ent"><script</span> src="/path/to/multiColorPicker.js"><<span class="pl-ent">/script</span>></pre></div><br>
         <h4>3.Add styles to the head section of your webpage:</h4>
-    <div class="highlight highlight-html"><pre><<span class="pl-ent">link</span> href="/path/to/multiColorPicker.css" rel="stylesheet"></pre></div><br>
+    <div class="highlight highlight-html"><pre><span class="pl-ent"><link</span> href="/path/to/multiColorPicker.css" rel="stylesheet"></pre></div><br>
             <h4>4.Initialize plugin</h4>
     <p>Add simple html to the body of your webpage:</p>
-    <div class="highlight highlight-html"><pre><<span class="pl-ent">div</span> data-element="multicolorpicker"><<span class="pl-ent">/div</span>></pre></div><br>
+    <div class="highlight highlight-html"><pre><span class="pl-ent"><div</span> data-element="multicolorpicker"><<span class="pl-ent">/div</span>></pre></div><br>
     <p>Add initialize script:</p>
-    <div class="highlight highlight-html"><pre><<span class="pl-ent">script</span> type="text/javascript" language="javascript">
+    <div class="highlight highlight-html"><pre><span class="pl-ent"><script</span> type="text/javascript" language="javascript">
         $(document).ready(function () {
             $('[data-element="multicolorpicker"]').multicolorpicker();
         });<<span class="pl-ent">/script</span>></pre></div><br>
