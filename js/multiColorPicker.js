@@ -32,7 +32,7 @@
         loadingText: 'loading...',
 
         pinStartValue: 0,
-        pinMidValue: 0.25,
+        pinMidValue: 0.5,
         pinEndValue: 1,
 
         pinStartColor: '#ff0509',

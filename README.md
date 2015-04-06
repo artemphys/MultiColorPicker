@@ -9,7 +9,7 @@ A simple JQuery plugin.
 
 ##### 2. Include script after the jQuery library:
 ```javascript
-<script src="/path/to/multiColorPicker.js">script>
+<script src="/path/to/multiColorPicker.js"><script>
 ```
 
 ##### 3. Add styles to the head section of your webpage
@@ -21,7 +21,7 @@ A simple JQuery plugin.
 
 Add simple html to the body of your webpage:
 ```javascript
-<div data-element="multicolorpicker">/div>
+<div data-element="multicolorpicker"></div>
 ```
 
 Add initialize script:
@@ -29,7 +29,7 @@ Add initialize script:
 <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $('[data-element="multicolorpicker"]').multicolorpicker();
-        });/script>
+        });</script>
 ```
 
 ### Settings
