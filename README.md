@@ -1,46 +1,56 @@
-<div>
-    <h2>MULTICOLORPICKER PLUGIN v1.0.1</h2>
-    <br>
-    <p>A simple JQuery plugin. </p>
+# MULTICOLORPICKER PLUGIN v1.0.1
 
-    <img src="MultiColorPicker.gif">
+A simple JQuery plugin.
+<img src="MultiColorPicker.gif">
+### Installation
+
+##### 1. Copy MULTICOLORPICKER PLUGIN files to your app
 
 
-    <h2>Installation</h2>
-    <br>
-    <h4>1. Copy MULTICOLORPICKER PLUGIN files to your app.</h4><br>
-    <h4>2. Include script after the jQuery library:</h4>
-    <div class="highlight highlight-html"><pre><span><</span><span>script src="/path/to/multiColorPicker.js"</span><span>><</span><span>script</span><span>></span></div><br>
-        <h4>3. Add styles to the head section of your webpage:</h4>
-    <div class="highlight highlight-html"><pre><span><</span><span>link href="/path/to/multiColorPicker.css" rel="stylesheet"</span><span>></span></pre></div><br>
-            <h4>4. Initialize plugin</h4>
-    <p>Add simple html to the body of your webpage:</p>
-    <div class="highlight highlight-html"><pre><span><</span><span>div data-element="multicolorpicker"</span><span>><</span><span>/div</span><span>></span></pre></div><br>
-    <p>Add initialize script:</p>
-    <div class="highlight highlight-html"><pre><span><</span><span>script type="text/javascript" language="javascript"</span><span>></span>
+##### 2. Include script after the jQuery library:
+```javascript
+<script src="/path/to/multiColorPicker.js">script>
+```
+
+##### 3. Add styles to the head section of your webpage
+```javascript
+<link href="/path/to/multiColorPicker.css" rel="stylesheet">
+```
+
+##### 4. Initialize plugin
+
+Add simple html to the body of your webpage:
+```javascript
+<div data-element="multicolorpicker">/div>
+```
+
+Add initialize script:
+```javascript
+<script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $('[data-element="multicolorpicker"]').multicolorpicker();
-        });<span><</span><span>/script</span><span>></span></pre></div><br>
+        });/script>
+```
 
-    <h2>Settings</h2>
-    <br>
-    <p>Add to initialize script "multicolorpicker({'option':'value'});". If parameters don't set, plugin use the defaults.</p>
-    <div class="highlight highlight-html"><pre>
-            <p>pinStartValue   : 0 //set start position</p>
-            <p>pinMidValue     : 0.5 //set middle position</p>
-            <p>pinEndValue     : 1 //set end position</p>
-            <p>pinStartColor   : #ff0509 //set color RGB</p>
-            <p>pinMidColor     : #fff605 //set color RGB</p>
-            <p>pinEndColor     : #0026ff //set color RGB</p>
-            <p>size            : 350 //set scrollbar-size(px)</p></pre></div>
+### Settings
 
-    <h2>Requirements</h2>
-    <br>
-    <ul>
-        <li>"jquery": "2.1.3"</li>
-        <li>"bootstrap": "3.3.2"</li>
-        <li>"jquery-ui": "1.11.4"</li>
-        <li>"mjaalnir-bootstrap-colorpicker": "2.1"</li>
-    </ul>
-</div>
+Add to initialize script "multicolorpicker({'option':'value'});". If parameters don't set, plugin use the defaults.
+```javascript
+pinStartValue   : 0 //set start position
+pinMidValue     : 0.5 //set middle position
+pinEndValue     : 1 //set end position
+pinStartColor   : #ff0509 //set color RGB
+pinMidColor     : #fff605 //set color RGB
+pinEndColor     : #0026ff //set color RGB
+size            : 350 //set scrollbar-size(px)
+```
+
+### Requirements
+
+
+ * "jquery": "2.1.3"
+ * "bootstrap": "3.3.2"
+ * "jquery-ui": "1.11.4"
+ * "mjaalnir-bootstrap-colorpicker": "2.1"
+
 
