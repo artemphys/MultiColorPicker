@@ -6,9 +6,6 @@
     border: 1px solid black;
     border-radius: 3px;
     position:relative;
-    background: -webkit-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%);/* Chrome10+,Safari5.1+ */
-    background: -ms-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%); /* IE10+ */
-    background: -moz-linear-gradient(top, #ff0509 20%,#fff605 50%,#0026ff 100%);/* FF3.6+ */
 }
 .multiColorPicker .nav-element {
     width: 100%;
@@ -16,33 +13,43 @@
     cursor: pointer;
 }
 .multiColorPicker .nav-element .color-control {
-    position:absolute; width:58px; height: 22px; top:-13px; left:-60px; text-align:right; padding: 2px;
+    position:absolute; width:58px; height: 22px; top:-13px; left:-62px; text-align:right; padding: 2px;
 }
 .multiColorPicker .nav-element .color-picker {
     position: absolute;
     width: 0;
     height: 0;
     top: -6px;
-    right: -10px;
+    right: -12px;
     border-top: 6px solid transparent;
     border-bottom: 6px solid transparent;
     border-right: 8px solid #222;
-    box-shadow: 3px 0 3px -2px #888;
+    z-index:100;
+}
+.multiColorPicker .nav-element:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -7px;
+    right: -13px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid #222;
+    z-index:90;
 }
 .multiColorPicker .bottom-point {
     position: absolute;
     top: 100%;
 }
-.multiColorPicker .draggable {z-index:100;}
-.multiColorPicker .nav-element .color-picker {border-right-color: #fff605;}
-.multiColorPicker .top-point .color-picker {border-right-color: #ff0509;}
-.multiColorPicker .bottom-point .color-picker {border-right-color: #0026ff;}
+.multiColorPicker .draggable {z-index:110;}
+
 .draggableRadius {
     position: absolute;
     width: 0px;
     height: 0px;
-    top: -44px;
-    right: -56px;
+    top: -43px;
+    right: -55px;
     border-top: 43px solid transparent;
     border-bottom: 43px solid transparent;
     border-right: 55px solid transparent;

@@ -39,9 +39,9 @@ Add to initialize script "multicolorpicker({'option':'value'});". If parameters 
 pinStartValue   : 0 //set start position
 pinMidValue     : 0.5 //set middle position
 pinEndValue     : 1 //set end position
-pinStartColor   : #ff0509 //set color RGB
-pinMidColor     : #fff605 //set color RGB
-pinEndColor     : #0026ff //set color RGB
+pinStartColor   : '#ff0509' //set color RGB
+pinMidColor     : '#fff605' //set color RGB
+pinEndColor     : '#0026ff' //set color RGB
 size            : 350 //set scrollbar-size(px)
 ```
 

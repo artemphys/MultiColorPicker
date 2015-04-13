@@ -35,9 +35,9 @@
         pinMidValue: 0.5,
         pinEndValue: 1,
 
-        pinStartColor: '#ff0509',
-        pinMidColor: '#fff605',
-        pinEndColor: '#0026ff',
+        pinStartColor: '#0000ff',
+        pinMidColor: '#ffffff',
+        pinEndColor: '#ff0000',
 
         size: 350
     }
@@ -45,31 +45,44 @@
     MultiColorPicker.prototype.init = function (element, options) {
         
         var that = this;
-        that.options   = that.getOptions(options);
+        that.options = that.getOptions(options);
         that.$element.html(that.options.template);
 
         // Init sub jquery plugins
         var $colorpickers = $('.color-picker', element).colorpicker();
-
         var $draggablePin = $('.draggable', element).draggable({ axis: 'y', containment: 'parent'});
         var $startedPin = $('.bottom-point', element);
         var $endedPin = $('.top-point', element);
-        
         $draggablePin.$input = $draggablePin.find('.color-control');
         $startedPin.$input = $startedPin.find('.color-control');
         $endedPin.$input = $endedPin.find('.color-control');
         // end
         
         // Set default parameters
+        var endColor;
+        var startColor;
+        var midColor;
         var $multiColorPicker = $('.multiColorPicker', element);
         $multiColorPicker.height(that.options.size);
-
-        var scrollbarLenght = that.options.size;
-        var scale = scrollbarLenght/100;
-
         $draggablePin.$input.val(that.options.pinMidValue);
         $endedPin.$input.val(that.options.pinEndValue);
         $startedPin.$input.val(that.options.pinStartValue);
+        var scrollbarLenght = that.options.size;
+        var scale = scrollbarLenght/100;
+        var pinEndColor = that.options.pinEndColor;
+        var pinMidColor = that.options.pinMidColor;
+        var pinStartColor = that.options.pinStartColor;
+        var range = that.options.pinEndValue - that.options.pinStartValue;
+        var pinMidPosition = 100-(((that.options.pinMidValue-that.options.pinStartValue)*100)/(range));
+
+        $endedPin.find('.color-picker').css('border-right-color', pinEndColor);
+        $startedPin.find('.color-picker').css('border-right-color', pinStartColor);
+        $draggablePin.find('.color-picker').css('border-right-color', pinMidColor);
+
+        $multiColorPicker.attr('style', 'height:'+that.options.size+'px;'+
+        'background: -webkit-linear-gradient(top, ' + pinEndColor + ' 0%,' + pinMidColor +' '+ pinMidPosition + '%,' + pinStartColor + ' 100%);'+
+        'background: -ms-linear-gradient(top, ' + pinEndColor + ' 0%,' + pinMidColor +' '+ pinMidPosition + '%,' + pinStartColor + ' 100%);'+
+        'background: -moz-linear-gradient(top, ' + pinEndColor + ' 0%,' + pinMidColor +' '+ pinMidPosition + '%,' + pinStartColor + ' 100%);');
         // end
         
         // Attach events handlers
@@ -105,24 +118,26 @@
             calibr();
         });
 
+
+
+        function getValues(){
+                    endColor = $endedPin.find('.ui-triangle').css('border-right-color');
+                    startColor = $startedPin.find('.ui-triangle').css('border-right-color');
+                    midColor = $draggablePin.find('.ui-triangle').css('border-right-color');
+        };
+
         $colorpickers.on('changeColor.colorpicker', function(event){
             $(this).css('border-right-color', event.color.toHex());
 
-            that.options.pinEndColor = $endedPin.find('.ui-triangle').css('border-right-color');
-            that.options.pinStartColor = $startedPin.find('.ui-triangle').css('border-right-color');
-            that.options.pinMidColor = $('.ui-triangle').css('border-right-color');
-
-            $multiColorPicker
-                .css('background', '-webkit-linear-gradient(top, '+that.options.pinEndColor+' 0%,'+that.options.pinMidColor+' 50%,'+that.options.pinStartColor+' 100%)')
-                .css('background', '-ms-linear-gradient(top, '+that.options.pinEndColor+' 0%,'+that.options.pinMidColor+' 50%,'+that.options.pinStartColor+' 100%)')
-                .css('background','-moz-linear-gradient(top, '+that.options.pinEndColor+' 0%,'+that.options.pinMidColor+' 50%,'+that.options.pinStartColor+' 100%)');
+            thatPosition();
+            var colorPosition = $draggablePin.position().top / scale;
+            getValues();
+            setGradient(colorPosition);
         });
 
         // end
 
         function calibr(){
-
-            var range = that.options.pinEndValue - that.options.pinStartValue;
             if(that.options.pinEndValue <= that.options.pinMidValue){
                 $draggablePin.$input.val(that.options.pinEndValue);
                 $draggablePin.css('top','0%');
@@ -132,10 +147,9 @@
                 $draggablePin.css('top','100%');
             }
             else {
-                $('.draggable').css('top',100-(((that.options.pinMidValue-that.options.pinStartValue)*100)/range)+'%');
+                $('.draggable').css('top',pinMidPosition+'%');
             }
             thatPosition();
-            //$draggablePin.mousemove();
         };
 
         function thatPosition(){
@@ -144,26 +158,25 @@
             that.options.pinStartValue = +$startedPin.$input.val();
         };
 
+        function setGradient(colorPosition){
+
+            $multiColorPicker
+                        .css('background', '-webkit-linear-gradient(top, ' + endColor + ' 0%,' + midColor + colorPosition + '%,' + startColor + ' 100%)')
+                        .css('background', '-ms-linear-gradient(top, ' + endColor + ' 0%,' + midColor + colorPosition + '%,' + startColor + ' 100%)')
+                        .css('background', '-moz-linear-gradient(top, ' + endColor + ' 0%,' + midColor + colorPosition + '%,' + startColor + ' 100%)');
+            that.options.pinEndColor=endColor;
+            that.options.pinMidColor=midColor;
+            that.options.pinStartColor=startColor;
+        }
+
         function onPinMove(){
-            var range = that.options.pinEndValue - that.options.pinStartValue;
             if(scrollbarLenght - $(this).position().top !== 0) {
                 $draggablePin.$input.val((that.options.pinStartValue+((range / scrollbarLenght) * (scrollbarLenght - $(this).position().top))).toFixed(5));
             }
-
+            getValues();
             thatPosition();
             var colorPosition = $(this).position().top / scale;
-            var topColor = $('.top-point').find('.ui-triangle').css('border-right-color');
-            var bottomColor = $('.bottom-point').find('.ui-triangle').css('border-right-color');
-            var midColor = $('.ui-triangle', this).css('border-right-color');
-
-            that.options.pinEndColor = topColor;
-            that.options.pinMidColor = midColor;
-            that.options.pinStartColor = bottomColor;
-
-            $multiColorPicker
-                .css('background', '-webkit-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
-                .css('background', '-ms-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)')
-                .css('background', '-moz-linear-gradient(top, ' + topColor + ' 0%,' + midColor + colorPosition + '%,' + bottomColor + ' 100%)');
+            setGradient(colorPosition);
         };
 
         calibr();
@@ -179,6 +192,8 @@
     }
 
     MultiColorPicker.prototype.getColors = function () {
+
+    //debugger;
         return {
             topColor : RGBA2HEX(this.options.pinEndColor),
             midColor : RGBA2HEX(this.options.pinMidColor),
